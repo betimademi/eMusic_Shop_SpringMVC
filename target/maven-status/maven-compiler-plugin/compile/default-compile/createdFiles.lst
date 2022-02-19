@@ -1,0 +1,5 @@
+com\emusic\dao\ProductDao.class
+com\emusic\model\Product.class
+com\emusic\controller\HomeController.class
+com\emusic\dao\ProductsDAO.class
+com\emusic\dao\implementation\ProductDAOImplementation.class

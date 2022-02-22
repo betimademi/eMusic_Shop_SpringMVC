@@ -15,7 +15,7 @@ public class ProductDao {
 
         Product product1 = new Product();
 
-        product1.setProductId("P123");
+        product1.setProductId(100);
         product1.setProductName("Guitar");
         product1.setProductCategory("Instrument");
         product1.setProductDescription("Wood made for HardRock");
@@ -27,7 +27,7 @@ public class ProductDao {
 
         Product product2 = new Product();
 
-        product2.setProductId("P223");
+        product2.setProductId(2000);
         product2.setProductName("Trumbs");
         product2.setProductCategory("Instrument");
         product2.setProductDescription("Steel made for LimpBizkit");
@@ -39,7 +39,7 @@ public class ProductDao {
 
         Product product3 = new Product();
 
-        product3.setProductId("P323");
+        product3.setProductId(300);
         product3.setProductName("Speaker");
         product3.setProductCategory("Instrument");
         product3.setProductDescription("Iron made for Pop");
@@ -57,9 +57,9 @@ public class ProductDao {
         return productList;
     }
 
-    public Product getProductById(String productId) throws IOException{
+    public Product getProductById(int productId) throws IOException{
         for(Product product:getProductList()){
-            if(product.getProductId().equals(productId)){
+            if(product.getProductId()==(productId)){
                 return product;
             }
         }

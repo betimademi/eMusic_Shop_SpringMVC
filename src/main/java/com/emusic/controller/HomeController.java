@@ -43,7 +43,7 @@ public class HomeController {
     }
 
     @RequestMapping("/productListOriginal/viewProduct/{productId}")
-    public String viewProduct(@PathVariable String productId, Model model) throws IOException {
+    public String viewProduct(@PathVariable int productId, Model model) throws IOException {
         //We create a new object instance of product from the productDao and we use a new function getProductId()
         Product product = productsDAO.getProductById(productId);
         model.addAttribute(product);

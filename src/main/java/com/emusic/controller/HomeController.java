@@ -25,16 +25,16 @@ public class HomeController {
 
     private Path path;
 
-//    private final ProductDao productDao = new ProductDao(); we used in dummy data
+    //    private final ProductDao productDao = new ProductDao(); we used in dummy data
     @Autowired
     private ProductsDAO productsDAO;
 
     @RequestMapping("/")
-    public String home(){
+    public String home() {
         return "home";
     }
 
-//    @RequestMapping("/productListExample")
+    //    @RequestMapping("/productListExample")
 //    public String getProductsExample(Model model){
 //        List<Product> productList = productsDAO.getAllProducts();
 //        Product product = productList.get(0);
@@ -43,9 +43,9 @@ public class HomeController {
 //        return "productListExample";
 //    }
     @RequestMapping("/productListOriginal")
-    public String getProducts(Model model){
+    public String getProducts(Model model) {
         List<Product> products = productsDAO.getAllProducts();
-        model.addAttribute("products",products);
+        model.addAttribute("products", products);
 
         return "productListOriginal";
     }
@@ -60,44 +60,44 @@ public class HomeController {
     }
 
     @RequestMapping("/admin")
-    public String adminPage(){
+    public String adminPage() {
         return "admin";
     }
 
     @RequestMapping("/admin/productInventory")
-    public String productInventory(Model model){
+    public String productInventory(Model model) {
         List<Product> products = productsDAO.getAllProducts();
-        model.addAttribute("products",products);
+        model.addAttribute("products", products);
 
         return "productInventory";
     }
 
     @RequestMapping(value = "/admin/productInventory/addProduct")
-    public String addProduct(Model model){
+    public String addProduct(Model model) {
         Product product = new Product();
         product.setProductCategory("Instrument");
         product.setProductCondition("new");
         product.setProductStatus("active");
 
-        model.addAttribute("product",product);
+        model.addAttribute("product", product);
 
         return "addProduct";
     }
 
-    @RequestMapping(value = "/admin/productInventory/addProduct",method = RequestMethod.POST)
-    public String addProductPost(@ModelAttribute("product")Product product, HttpServletRequest request){
+    @RequestMapping(value = "/admin/productInventory/addProduct", method = RequestMethod.POST)
+    public String addProductPost(@ModelAttribute("product") Product product, HttpServletRequest request) {
         productsDAO.addProduct(product);
 
         MultipartFile productImage = product.getProductImage();
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
         path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\" + product.getProductId() + ".png");
 
-        if (productImage !=null && !productImage.isEmpty()){
-            try{
+        if (productImage != null && !productImage.isEmpty()) {
+            try {
                 productImage.transferTo(new File(path.toString()));
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
-                throw new RuntimeException("Product image saving failed",e);
+                throw new RuntimeException("Product image saving failed", e);
             }
         }
 
@@ -106,21 +106,51 @@ public class HomeController {
     }
 
     @RequestMapping("/admin/productInventory/deleteProduct/{id}")
-    public String deleteProduct(@PathVariable int id,Model model, HttpServletRequest request){
+    public String deleteProduct(@PathVariable int id, Model model, HttpServletRequest request) {
 
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
         path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\" + id + ".png");
 
 
-        if(Files.exists(path)){
+        if (Files.exists(path)) {
             try {
                 Files.delete(path);
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
         productsDAO.deleteProduct(id);
+
+        return "redirect:/admin/productInventory";
+    }
+
+    @RequestMapping("/admin/productInventory/editProduct/{id}")
+    public String editProduct(@PathVariable("id") int id, Model model) {
+
+        Product product = productsDAO.getProductById(id);
+        model.addAttribute(product);
+
+        return "editProduct";
+
+    }
+
+    @RequestMapping(value = "/admin/productInventory/editProduct", method = RequestMethod.POST)
+    public String editProduct(@ModelAttribute("product") Product product, Model model, HttpServletRequest request) {
+
+        MultipartFile productImage = product.getProductImage();
+        String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+        path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\" +product.getProductId()+" .png");
+
+        if (productImage != null && !productImage.isEmpty()){
+            try{
+                productImage.transferTo(new File(path.toString()));
+            } catch (Exception e){
+                throw new RuntimeException("Product image saving failed",e);
+            }
+
+        }
+        productsDAO.editProduct(product);
 
         return "redirect:/admin/productInventory";
     }

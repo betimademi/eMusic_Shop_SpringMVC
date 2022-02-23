@@ -1,0 +1,16 @@
+.table {
+    table-layout:auto;
+    overflow: auto;
+}
+.table th {
+    text-align: right;
+}
+
+.table td {
+    text-align: center;
+    background: green;
+    display:block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -25,11 +25,9 @@ public class Product {
     private String productCategory;
     private String productDescription;
 
-//    @Min(value = 0, message = "The product price must not be less then zero.")
-@Pattern(
-        regexp = "/(\\d+(.\\d+)?)/",
-        message = "The product price must be a number."
-)
+
+    @Min(value = 0, message = "The product price must not be less then zero.")
+
     private double productPrice;
     private String productCondition;
     private String productStatus;

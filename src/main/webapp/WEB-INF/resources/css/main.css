@@ -11,6 +11,7 @@
     height: auto !important;
 }
 
+<<<<<<< HEAD
 .table {
     table-layout: fixed;
     overflow: auto;
@@ -29,3 +30,23 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+=======
+/*.table {*/
+/*    table-layout: fixed;*/
+/*    overflow: auto;*/
+/*}*/
+
+/*.table th {*/
+/*    text-align: center;*/
+/*}*/
+
+/*.table td {*/
+/*    text-align: center;*/
+/*    background: whitesmoke;*/
+
+/*    display: block;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*    white-space: nowrap;*/
+/*}*/
+>>>>>>> Version_2

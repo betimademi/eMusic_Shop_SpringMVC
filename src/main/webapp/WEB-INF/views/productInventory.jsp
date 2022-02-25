@@ -7,7 +7,8 @@
     <div class="container">
         <div class="page-header">
             <h1>Product Inventory Page</h1>
-            <p class="load">This is the product inventory page</p>
+
+            <p class="lead">This is the product inventory page!</p>
         </div>
 
         <table class="table table-striped table-hover">
@@ -23,27 +24,23 @@
             </thead>
             <c:forEach items="${products}" var="product">
                 <tr>
-                    <td><img src="<c:url value="/resources/images/${product.productId}.png" /> " alt="image" style="width: 15%;height: 15%"></td>
+                    <td><img src="<c:url value="/resources/images/${product.productId}.png" /> " alt="image"
+                             style="width:100%"/></td>
                     <td>${product.productName}</td>
                     <td>${product.productCategory}</td>
                     <td>${product.productCondition}</td>
                     <td>${product.productPrice} USD</td>
-                    <td>
-                        <a href="<spring:url value="/productListOriginal/viewProduct/${product.productId}" />">
-                            <span class="glyphicon glyphicon-info-sign"></span>
-                            <a href="<spring:url value="/admin/productInventory/deleteProduct/${product.productId}" />">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <a href="<spring:url value="/admin/productInventory/editProduct/${product.productId}" />">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
-
-                        </a>
+                    <td><a href="<spring:url value="/productList/viewProduct/${product.productId}" />"
+                    ><span class="glyphicon glyphicon-info-sign"></span></a>
+                        <a href="<spring:url value="/admin/productInventory/deleteProduct/${product.productId}" />"
+                        ><span class="glyphicon glyphicon-remove"></span></a>
+                        <a href="<spring:url value="/admin/productInventory/editProduct/${product.productId}" />"
+                        ><span class="glyphicon glyphicon-pencil"></span></a>
                     </td>
                 </tr>
             </c:forEach>
         </table>
 
-        <a href="<spring:url value="/admin/productInventory/addProduct" />" class="btn btn-primary">Add product</a>
+        <a href="<spring:url value="/admin/productInventory/addProduct" />" class="btn btn-primary">Add Product</a>
 
-        <!-- FOOTER -->
-        <%@include file="/WEB-INF/views/template/footer.jsp"%>
+        <%@include file="/WEB-INF/views/template/footer.jsp" %>

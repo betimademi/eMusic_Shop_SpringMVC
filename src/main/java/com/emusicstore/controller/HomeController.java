@@ -48,7 +48,7 @@ public class HomeController {
     }
 
     @RequestMapping("/productList/viewProduct/{productId}")
-    public String viewProduct(@PathVariable String productId, Model model) throws IOException {
+    public String viewProduct(@PathVariable int productId, Model model) throws IOException {
 
         Product product = productDao.getProductById(productId);
         model.addAttribute(product);
@@ -109,7 +109,7 @@ public class HomeController {
 
 
     @RequestMapping("/admin/productInventory/deleteProduct/{id}")
-    public String deleteProduct(@PathVariable String id, Model model, HttpServletRequest request) {
+    public String deleteProduct(@PathVariable int id, Model model, HttpServletRequest request) {
 
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
         path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\" + id + ".png");
@@ -129,7 +129,7 @@ public class HomeController {
 
 
     @RequestMapping("/admin/productInventory/editProduct/{id}")
-    public String editProduct(@PathVariable("id") String id, Model model) {
+    public String editProduct(@PathVariable("id") int id, Model model) {
         Product product = productDao.getProductById(id);
 
         model.addAttribute(product);

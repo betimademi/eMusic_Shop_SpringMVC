@@ -8,7 +8,15 @@
 
             <h2>Login with username and password</h2>
 
+            <c:if test = "${not empty msg}">
+                <div class="msg">${msg}</div>
+            </c:if>
+
             <form name="loginForm" action="<c:url value="/j_spring_security_check" />" method="POST">
+
+                <c:if test="${not empty error}">
+                    <div class="error" style="color: #c9302c">${error}</div>
+                </c:if>
 
                 <div class="form-group">
 

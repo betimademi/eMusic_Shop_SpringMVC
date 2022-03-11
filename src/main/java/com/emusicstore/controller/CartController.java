@@ -35,7 +35,7 @@ public class CartController {
         cartDao.update(cartId,cart);
     }
 
-    @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{cartId)", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(value = "cartId") String cartId){
         cartDao.delete(cartId);
